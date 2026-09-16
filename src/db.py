@@ -16,7 +16,7 @@ def get_engine():
 
 
 def aplicar_schema(engine, caminho_schema="schema.sql"):
-    """Executa o schema.sql para garantir que as tabelas existam."""
+
     with open(caminho_schema, "r", encoding="utf-8") as f:
         ddl = f.read()
     with engine.begin() as conn:
