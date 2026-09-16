@@ -9,7 +9,7 @@ ANOS_DESEJADOS = {2023, 2024, 2025, 2026}
 
 
 def preco_fim_de_ano(engine, ticker: str, ano: int):
-    """Último preço de fechamento registrado no ano (ou None)."""
+
     sql = text(
         """
         SELECT fechamento
@@ -110,7 +110,7 @@ def calcular_indicadores_empresa(engine, ticker: str, ticker_yahoo: str) -> list
             }
         )
 
-    # crescimento de receita ano contra ano
+
     for linha in resultados:
         ano_anterior = linha["ano"] - 1
         receita_atual = receitas_por_ano.get(linha["ano"])
@@ -122,12 +122,8 @@ def calcular_indicadores_empresa(engine, ticker: str, ticker_yahoo: str) -> list
 
 
 def _sanitizar(valor):
-    """Converte numpy.float64/NaN para tipos nativos do Python que o psycopg2 entende.
 
-    Atenção: numpy.float64 é subclasse de float, então checar isinstance(x, float)
-    NÃO é suficiente para detectá-lo — por isso chamamos .item() primeiro sempre
-    que o valor tiver esse método (é como se "descasca" o tipo numpy).
-    """
+
     if valor is None:
         return None
     if isinstance(valor, str):
